@@ -1,29 +1,46 @@
-# Camera OpenAI Vision Streamlit
+# Camera Vision App
 
-This project is a Streamlit application that integrates camera functionality with OpenAI's Vision API to analyze and process images in real-time.
+A Streamlit app that takes a webcam photo and asks an OpenAI vision model about it.
 
-## About
+## Why this exists
+A small experiment with multimodal LLMs: sending a live camera image plus an instruction to GPT-4o.
 
-This application allows users to capture images using their camera and leverage OpenAI's powerful vision capabilities to analyze and understand the content of those images.
+## What it does
+- Captures a photo with `st.camera_input`
+- Sends the image (base64) and your instruction to `gpt-4o`
+- Shows the model's description or answer
+- Includes a separate script that tracks people from the webcam with YOLOv8 and shows FPS
 
-## Live Demo
+## Project structure
+```
+camera-openai-vision-streamlit/
+├── app.py                     Streamlit camera and vision app
+├── yolov8_person_tracking.py  Webcam person tracking (YOLOv8)
+├── index.html                 Static browser version
+└── requirements.txt           Python dependencies
+```
 
-Try out the application here: [https://cameraopenaivisionapp.streamlit.app/](https://cameraopenaivisionapp.streamlit.app/)
+## Getting started
+Requirements: Python 3.10+, a webcam, an OpenAI API key.
+```bash
+git clone https://github.com/abhijha8287/camera-openai-vision-streamlit.git
+cd camera-openai-vision-streamlit
+pip install -r requirements.txt
+streamlit run app.py
+```
+Paste your API key in the sidebar when the app opens.
 
-## Features
+For the YOLOv8 script:
+```bash
+pip install ultralytics opencv-python
+python yolov8_person_tracking.py
+```
 
-- Camera integration for real-time image capture
-- OpenAI Vision API integration for image analysis
-- User-friendly Streamlit interface
+## Configuration
+The OpenAI API key is entered in the app's sidebar and is not stored.
 
-## Getting Started
+## Tech stack
+Python, Streamlit, OpenAI API (GPT-4o), Ultralytics YOLOv8, OpenCV
 
-1. Clone this repository
-2. Install the required dependencies from `requirements.txt`
-3. Run the Streamlit application with `streamlit run app.py`
-
-## Technologies Used
-
-- Streamlit
-- OpenAI Vision API
-- Python
+## Notes
+Live demo: https://cameraopenaivisionapp.streamlit.app
